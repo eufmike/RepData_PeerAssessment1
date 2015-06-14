@@ -35,7 +35,7 @@ step.total <- summarize(step.date,
 ```
 Make a histogram of the total number of steps taken each day
 ```{r}
-barplot(step.total$step_total, names.arg = step.total$date, ylab= "total steps per day", xlab = "date")
+hist(step.total$step_total, breaks = 20, xlab = "total number of steps taken by each day", col = "blue")
 ```
 
 Calculate and report the mean and median of the total number of steps taken per day
@@ -89,12 +89,17 @@ step.date.nona <- group_by(data.no.na, date)
 step.total.nona <- summarize(step.date.nona, 
                         step_total = sum(steps, na.rm = T))
 
-barplot(step.total.nona$step_total, names.arg = step.total.nona$date, ylab= "total steps per day", xlab = "date")
+hist(step.total.nona$step_total, breaks = 20, xlab = "total number of steps taken by each day", col = "blue")
+
 ```
 
 Re-calculate the mean and median.
 ```{r}
 summary(step.total.nona$step_total)
+```
+Compare to the original data set.
+```{r}
+summary(step.total$step_total)
 ```
 We found the mean and median of total steps per day changed, because I replaced the NAs by the mean value. This procedure will increase the total step counts, which increase the mean and median of the step counts. 
 

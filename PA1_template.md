@@ -52,7 +52,7 @@ step.total <- summarize(step.date,
 Make a histogram of the total number of steps taken each day
 
 ```r
-barplot(step.total$step_total, names.arg = step.total$date, ylab= "total steps per day", xlab = "date")
+hist(step.total$step_total, breaks = 20, xlab = "total number of steps taken by each day", col = "blue")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
@@ -130,7 +130,7 @@ step.date.nona <- group_by(data.no.na, date)
 step.total.nona <- summarize(step.date.nona, 
                         step_total = sum(steps, na.rm = T))
 
-barplot(step.total.nona$step_total, names.arg = step.total.nona$date, ylab= "total steps per day", xlab = "date")
+hist(step.total.nona$step_total, breaks = 20, xlab = "total number of steps taken by each day", col = "blue")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-13-1.png) 
@@ -144,6 +144,16 @@ summary(step.total.nona$step_total)
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##      41    9819   10770   10770   12810   21190
+```
+Compare to the original data set.
+
+```r
+summary(step.total$step_total)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0    6778   10400    9354   12810   21190
 ```
 We found the mean and median of total steps per day changed, because I replaced the NAs by the mean value. This procedure will increase the total step counts, which increase the mean and median of the step counts. 
 
@@ -166,7 +176,7 @@ xyplot(step.avg$step_avg ~ step.avg$interval | step.avg$wDay, layout(1, 2), type
        xlab = "Interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-16-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-17-1.png) 
 
 Are they different?
 The answer should be "I don't know". The pattern looks slightly different, but I did not include error bar in the plot. Without the help of statistic analysis, we won't be able to know if there is significant difference or not. 
